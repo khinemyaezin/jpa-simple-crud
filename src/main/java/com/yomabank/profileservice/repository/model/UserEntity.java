@@ -1,6 +1,6 @@
 package com.yomabank.profileservice.repository.model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,11 +10,11 @@ import java.util.List;
 @Table(name="user")
 @Getter
 @Setter
-public class User {
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    private long Id;
+    private long id;
 
     @Column(name="first_name")
     private String firstName;
@@ -26,8 +26,8 @@ public class User {
     private String nrc;
 
     @OneToMany(mappedBy ="user",fetch = FetchType.LAZY)
-    private List<ContactInfo> contactInfoList;
+    private List<ContactInfoEntity> contactInfoList;
 
-    @OneToMany(mappedBy ="address",fetch = FetchType.LAZY)
-    private List<Address> address;
+    @OneToMany(mappedBy ="user",fetch = FetchType.LAZY)
+    private List<AddressEntity> address;
 }

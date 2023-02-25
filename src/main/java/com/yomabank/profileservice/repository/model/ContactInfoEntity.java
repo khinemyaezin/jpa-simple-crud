@@ -1,16 +1,15 @@
 package com.yomabank.profileservice.repository.model;
 
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
+import javax.persistence.*;
 
 @Entity
 @Table(name="contact_info")
 @Getter
 @Setter
-public class ContactInfo {
+public class ContactInfoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
@@ -21,9 +20,9 @@ public class ContactInfo {
 
     @ManyToOne
     @JoinColumn(name="user_id")
-    private User user;
+    private UserEntity user;
 
     @ManyToOne
     @JoinColumn(name="contact_type_id")
-    private ContactType contactType;
+    private ContactTypeEntity contactType;
 }

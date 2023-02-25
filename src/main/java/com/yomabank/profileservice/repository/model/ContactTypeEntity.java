@@ -1,6 +1,6 @@
 package com.yomabank.profileservice.repository.model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,12 +10,12 @@ import java.util.List;
 @Table(name="contact_type")
 @Getter
 @Setter
-public class ContactType {
+public class ContactTypeEntity {
 
     @Id
     @Column(name="id")
     private String id;
 
     @OneToMany(mappedBy ="contactType",fetch = FetchType.EAGER)
-    private List<ContactInfo> contactInfoList;
+    private List<ContactInfoEntity> contactInfoList;
 }
