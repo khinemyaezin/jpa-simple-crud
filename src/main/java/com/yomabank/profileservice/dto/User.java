@@ -12,7 +12,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@JsonSerialize( using = CustomSerializer.class)
 public class User {
 
     private long id;

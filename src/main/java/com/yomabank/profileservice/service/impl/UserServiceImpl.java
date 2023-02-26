@@ -1,5 +1,6 @@
 package com.yomabank.profileservice.service.impl;
 
+import com.yomabank.profileservice.dto.User;
 import com.yomabank.profileservice.repository.UserRepo;
 import com.yomabank.profileservice.repository.model.UserEntity;
 import com.yomabank.profileservice.service.UserService;
@@ -7,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -25,13 +29,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserEntity> findALlUser(UserEntity user) {
-        Specification specification = Specification.where(
+    public List<User> findALlUser(User user) throws IllegalAccessException {
+        Specification specification;
+        Field[] fields = User.class.getDeclaredFields();
+        for (Field field : fields) {
+            Optional value = Optional.ofNullable(field.get(user));
+            if(value.isPresent()) {
+                specification = Specification.where(
+                        (u, cq, cb) -> cb.like(u.get(field.getName()), "%" + value + "%")
+                );
+            }
+        }
+
+        Specification.where(
                 (u, cq, cb) -> cb.like(u.get("firstName"), "%" + user.getFirstName() + "%")
         ).and(Specification.where(
                 (u, cq, cb) -> cb.like(u.get("lastName"), "%" + user.getLastName() + "%")
         ));
         return this.userRepo.findAll(specification);
+
     }
 
     @Override
