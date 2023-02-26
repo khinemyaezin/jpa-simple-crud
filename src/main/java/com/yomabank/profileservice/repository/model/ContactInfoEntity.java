@@ -26,13 +26,8 @@ public class ContactInfoEntity {
     @JoinColumn(name="user_id")
     private UserEntity user;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name="contact_type_id")
     private ContactTypeEntity contactType;
 
-    public ContactInfoEntity(String contactValue, UserEntity user, ContactTypeEntity contactType) {
-        this.contactValue = contactValue;
-        this.user = user;
-        this.contactType = contactType;
-    }
 }

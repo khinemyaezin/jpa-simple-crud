@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -30,9 +31,23 @@ public class UserEntity {
     @Column(name="nrc")
     private String nrc;
 
-    @OneToMany(mappedBy ="user",fetch = FetchType.LAZY)
-    private List<ContactInfoEntity> contactInfoList;
+    @OneToMany(mappedBy ="user",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<ContactInfoEntity> contactInfoList = new ArrayList<>();
 
-    @OneToMany(mappedBy ="user",fetch = FetchType.LAZY)
-    private List<AddressEntity> address;
+    @OneToMany(mappedBy ="user",fetch = FetchType.LAZY, cascade = CascadeType.ALL )
+    private List<AddressEntity> addressList= new ArrayList<>();
+
+    public void setContactInfo(ContactInfoEntity contact) {
+        if(contact != null) {
+            contact.setUser(this);
+            this.contactInfoList.add(contact);
+        }
+    }
+
+    public void setAddress(AddressEntity address) {
+        if(address != null) {
+            address.setUser(this);
+            this.addressList.add(address);
+        }
+    }
 }

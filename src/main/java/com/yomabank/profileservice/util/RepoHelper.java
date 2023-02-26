@@ -1,7 +1,6 @@
-package com.yomabank.profileservice.repository.helper;
+package com.yomabank.profileservice.util;
 
-import com.yomabank.profileservice.dto.Filter;
-import org.springframework.context.annotation.ComponentScan;
+import com.yomabank.profileservice.repository.model.CriteriaFilter;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
@@ -10,17 +9,17 @@ import java.util.List;
 
 @Component
 public class RepoHelper {
-    public static <T> Specification<T> getSpecificationFromFilters(T type,List<Filter> filter) {
+    public static <T> Specification<T> getSpecificationFromFilters(List<CriteriaFilter> filter) {
         Specification<T> specification = Specification.where(
-                createSpecification(type,filter.remove(0))
+                createSpecification(filter.remove(0))
         );
-        for (Filter input : filter) {
-            specification = specification.and(createSpecification(type,input));
+        for (CriteriaFilter input : filter) {
+            specification = specification.and(createSpecification(input));
         }
         return specification;
     }
 
-    private static <T> Specification<T> createSpecification(T type,Filter input) {
+    private static <T> Specification<T> createSpecification(CriteriaFilter input) {
         switch (input.getOperator()){
             case EQUALS:
                 return (root, query, criteriaBuilder) ->

@@ -1,18 +1,20 @@
 package com.yomabank.profileservice.dto;
 
-import com.yomabank.profileservice.repository.model.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import javax.persistence.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ContactInfo {
+public class Address {
     private long id;
-    private String contactValue;
-    private ContactType contactType;
+    private String address;
+    private String townshipOrCity;
+    private String district;
+    private String state;
+    private String postalCode;
+
 }

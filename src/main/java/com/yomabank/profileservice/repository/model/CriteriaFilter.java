@@ -1,4 +1,4 @@
-package com.yomabank.profileservice.dto;
+package com.yomabank.profileservice.repository.model;
 
 import com.yomabank.profileservice.constant.QueryOperator;
 import lombok.*;
@@ -9,7 +9,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Filter {
+public class CriteriaFilter {
         private String field;
         private QueryOperator operator;
         private String value;

@@ -6,6 +6,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ResponseBody<T> {
-    private boolean success;
     private T details;
 }

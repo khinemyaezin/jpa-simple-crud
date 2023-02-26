@@ -4,15 +4,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yomabank.profileservice.dto.ResponseBody;
 import com.yomabank.profileservice.dto.User;
-import com.yomabank.profileservice.dto.UserRequest;
-import com.yomabank.profileservice.repository.model.UserEntity;
+import com.yomabank.profileservice.dto.UserSearchCriteriaRequest;
 import com.yomabank.profileservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,20 +24,27 @@ public class UserController {
     }
 
     @GetMapping(value = "")
-    public ResponseEntity<ResponseBody> getUsers(@RequestBody UserRequest userRequest) throws JsonProcessingException {
+    public ResponseEntity<ResponseBody> getUsers(@RequestBody UserSearchCriteriaRequest userRequest){
         List<User> userList = this.userService.findALlUser(userRequest);
         ResponseBody response = new ResponseBody<User>();
         response.setDetails(userList);
         return ResponseEntity.ok(response);
     }
-//    @PostConstruct
-//    public void getUsers() {
-//        UserEntity criteria = new UserEntity();
-//        criteria.setFirstName("kmz");
-//        criteria.setLastName("zin");
-//        List<UserEntity> users = this.userService.findALlUser(criteria);
-//        users.stream().forEach( u-> {
-//            System.out.println(u.getFirstName());
-//        });
-//    }
+
+    @PostMapping(value = "")
+    public ResponseEntity<ResponseBody> saveUser(@RequestBody User user) throws JsonProcessingException {
+        User createdUser = this.userService.createUser(user);
+        ResponseBody response = new ResponseBody<User>();
+        response.setDetails(createdUser);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<ResponseBody> findUserByID(@PathVariable("id") String id){
+        User u = this.userService.findUserById(id);
+        ResponseBody response = new ResponseBody<User>();
+        response.setDetails(u);
+        return ResponseEntity.ok(response);
+    }
+
 }
