@@ -1,6 +1,8 @@
 package com.yomabank.profileservice.repository.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -9,6 +11,8 @@ import javax.persistence.*;
 @Table(name="contact_info")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ContactInfoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,4 +29,10 @@ public class ContactInfoEntity {
     @ManyToOne
     @JoinColumn(name="contact_type_id")
     private ContactTypeEntity contactType;
+
+    public ContactInfoEntity(String contactValue, UserEntity user, ContactTypeEntity contactType) {
+        this.contactValue = contactValue;
+        this.user = user;
+        this.contactType = contactType;
+    }
 }

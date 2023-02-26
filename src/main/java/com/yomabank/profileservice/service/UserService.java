@@ -1,6 +1,7 @@
 package com.yomabank.profileservice.service;
 
 import com.yomabank.profileservice.dto.User;
+import com.yomabank.profileservice.dto.UserRequest;
 import com.yomabank.profileservice.repository.model.UserEntity;
 
 import java.util.List;
@@ -8,10 +9,11 @@ import java.util.List;
 
 public interface UserService {
 
-    public UserEntity createUser(UserEntity user);
-    public List<UserEntity> findALlUser(UserEntity user);
-
+    public User createUser(User user);
+    public List<User> findALlUser(UserRequest user);
     List<User> findALlUser(User user) throws IllegalAccessException;
 
-    public UserEntity findUserById();
+    public User findUserById(String id);
+
+    public void deleteById(String id) ;
 }

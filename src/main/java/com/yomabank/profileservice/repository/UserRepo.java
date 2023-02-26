@@ -12,4 +12,7 @@ import org.springframework.stereotype.Repository;
 public interface UserRepo extends JpaRepository<UserEntity,Long>, JpaSpecificationExecutor<UserEntity> {
     public Page<UserEntity> findAll(Specification<UserEntity> spec, Pageable pageable);
 
+
+
+
 }
