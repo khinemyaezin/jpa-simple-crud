@@ -1,11 +1,9 @@
-package com.yomabank.profileservice.dto;
+package com.yomabank.profileservice.datatransferobject;
 
-import com.yomabank.profileservice.repository.model.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import javax.persistence.*;
 
 @Getter
 @Setter

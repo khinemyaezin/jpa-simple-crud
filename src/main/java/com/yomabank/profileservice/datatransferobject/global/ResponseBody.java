@@ -1,4 +1,4 @@
-package com.yomabank.profileservice.dto;
+package com.yomabank.profileservice.datatransferobject.global;
 
 import lombok.Getter;
 import lombok.Setter;

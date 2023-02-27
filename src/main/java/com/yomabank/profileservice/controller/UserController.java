@@ -2,9 +2,9 @@ package com.yomabank.profileservice.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.yomabank.profileservice.dto.ResponseBody;
-import com.yomabank.profileservice.dto.User;
-import com.yomabank.profileservice.dto.UserSearchCriteriaRequest;
+import com.yomabank.profileservice.datatransferobject.global.ResponseBody;
+import com.yomabank.profileservice.datatransferobject.User;
+import com.yomabank.profileservice.datatransferobject.UserSearchCriteriaRequest;
 import com.yomabank.profileservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -44,6 +44,13 @@ public class UserController {
         User u = this.userService.findUserById(id);
         ResponseBody response = new ResponseBody<User>();
         response.setDetails(u);
+        return ResponseEntity.ok(response);
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<ResponseBody> updateUserByID(@PathVariable("id") String id,@RequestBody User user){
+        this.userService.updateUser(user,Long.parseLong(id));
+        ResponseBody response = new ResponseBody<User>();
         return ResponseEntity.ok(response);
     }
 
